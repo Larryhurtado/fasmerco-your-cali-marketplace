@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { allProducts, flashProducts } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
+import Filters from "@/components/Filters";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,15 +21,20 @@ const SearchPage = () => {
       </h1>
       <p className="text-sm text-muted-foreground mb-6">{results.length} producto(s) encontrado(s)</p>
 
-      {results.length === 0 ? (
-        <p className="text-muted-foreground py-12 text-center">No encontramos productos para tu búsqueda.</p>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {results.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      )}
+      <div className="flex gap-8">
+        <Filters />
+        {results.length === 0 ? (
+          <p className="text-muted-foreground py-12 text-center flex-1">No encontramos productos para tu búsqueda.</p>
+        ) : (
+          <div className="flex-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {results.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

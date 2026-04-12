@@ -55,13 +55,17 @@ export const flashProducts: Product[] = Array.from({ length: 6 }, (_, i) => ({
   category: categories[i % categories.length],
 }));
 
-export const allProducts: Product[] = Array.from({ length: 12 }, (_, i) => ({
+export const allProducts: Product[] = Array.from({ length: 24 }, (_, i) => ({
   id: i + 100,
-  name: names[i],
+  name: names[i % names.length],
   price: Math.round((Math.random() * 200 + 15) * 1000),
-  image: imgs[i],
+  image: imgs[i % imgs.length],
   store: stores[i % stores.length],
   rating: +(3 + Math.random() * 2).toFixed(1),
   verified: i % 3 !== 2,
   category: categories[i % categories.length],
 }));
+
+// Subsets for home carousels
+export const bestSellerProducts: Product[] = allProducts.slice(0, 8).map((p, i) => ({ ...p, id: 200 + i }));
+export const techProducts: Product[] = allProducts.filter(p => p.category === "Tecnología").map((p, i) => ({ ...p, id: 300 + i }));

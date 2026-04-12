@@ -1,16 +1,18 @@
 import HeroCarousel from "@/components/HeroCarousel";
 import FlashDeals from "@/components/FlashDeals";
-import Filters from "@/components/Filters";
-import ProductGrid from "@/components/ProductGrid";
+import FeaturedCategories from "@/components/FeaturedCategories";
+import ProductCarouselSection from "@/components/ProductCarouselSection";
+import StoreCarouselSection from "@/components/StoreCarouselSection";
+import { bestSellerProducts, techProducts } from "@/data/products";
 
 const Index = () => (
   <div className="container mx-auto max-w-[1440px] px-6 py-8 space-y-10">
     <HeroCarousel />
     <FlashDeals />
-    <div className="flex gap-8">
-      <Filters />
-      <ProductGrid />
-    </div>
+    <FeaturedCategories />
+    <ProductCarouselSection title="Lo más vendido en Cali" products={bestSellerProducts} badge="🔥 Trending" />
+    <StoreCarouselSection />
+    <ProductCarouselSection title="Tecnología con entrega inmediata" products={techProducts} badge="⚡ Llega hoy" />
   </div>
 );
 
