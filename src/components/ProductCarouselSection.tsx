@@ -30,7 +30,7 @@ const ProductCarouselSection = ({ title, products, badge }: ProductCarouselSecti
 
   return (
     <section>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center mb-4">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-bold">{title}</h2>
           {badge && (
@@ -39,33 +39,36 @@ const ProductCarouselSection = ({ title, products, badge }: ProductCarouselSecti
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2">
+      </div>
+      <div className="relative group">
+        {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
-            disabled={!canScrollLeft}
-            className="p-1.5 rounded-full border border-border hover:bg-secondary disabled:opacity-30 transition"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 p-2 rounded-full border border-border bg-background shadow-md hover:bg-secondary transition opacity-0 group-hover:opacity-100"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
+        )}
+        {canScrollRight && (
           <button
             onClick={() => scroll("right")}
-            disabled={!canScrollRight}
-            className="p-1.5 rounded-full border border-border hover:bg-secondary disabled:opacity-30 transition"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 p-2 rounded-full border border-border bg-background shadow-md hover:bg-secondary transition opacity-0 group-hover:opacity-100"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
+        )}
+        <div
+          ref={scrollRef}
+          onScroll={checkScroll}
+          className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {products.map((p) => (
+            <div key={p.id} className="min-w-[220px] max-w-[220px] flex-shrink-0">
+              <ProductCard product={p} />
+            </div>
+          ))}
         </div>
-      </div>
-      <div
-        ref={scrollRef}
-        onScroll={checkScroll}
-        className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"
-      >
-        {products.map((p) => (
-          <div key={p.id} className="min-w-[220px] max-w-[220px] flex-shrink-0">
-            <ProductCard product={p} />
-          </div>
-        ))}
       </div>
     </section>
   );
