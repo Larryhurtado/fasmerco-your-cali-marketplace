@@ -64,8 +64,8 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
               <span>Total</span>
               <span className="text-primary">{fmt(totalPrice)}</span>
             </div>
-            <button className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition">
-              Ir a pagar
+            <button onClick={onClose} className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition">
+              <a href="/cart">Ver carrito completo</a>
             </button>
           </div>
         )}
