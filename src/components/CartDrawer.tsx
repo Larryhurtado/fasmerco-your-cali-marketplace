@@ -1,4 +1,5 @@
 import { X, Trash2, ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 
 const fmt = (n: number) =>
@@ -64,9 +65,9 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
               <span>Total</span>
               <span className="text-primary">{fmt(totalPrice)}</span>
             </div>
-            <button onClick={onClose} className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition">
-              <a href="/cart">Ver carrito completo</a>
-            </button>
+            <Link to="/cart" onClick={onClose} className="block w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition text-center">
+              Ver carrito completo
+            </Link>
           </div>
         )}
       </div>
