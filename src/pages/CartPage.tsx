@@ -55,7 +55,6 @@ const CartPage = () => {
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        </button>
                         <span className="text-sm font-semibold w-6 text-center">{item.qty}</span>
                         <button
                           onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image, store: item.store })}
