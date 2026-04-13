@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import StorePage from "./pages/StorePage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import SearchPage from "./pages/SearchPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import AccountPage from "./pages/AccountPage";
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/store/:slug" element={<StorePage />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="/account" element={<AccountPage />} />
