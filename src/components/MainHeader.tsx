@@ -43,10 +43,10 @@ const MainHeader = ({ onCartOpen }: MainHeaderProps) => {
         </form>
 
         <div className="flex items-center gap-5">
-          <button className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition text-xs">
+          <Link to="/favorites" className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition text-xs">
             <Heart className="h-5 w-5" />
             <span>Favoritos</span>
-          </button>
+          </Link>
           <button
             onClick={onCartOpen}
             className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition text-xs relative"
@@ -59,10 +59,10 @@ const MainHeader = ({ onCartOpen }: MainHeaderProps) => {
             )}
             <span>Carrito</span>
           </button>
-          <button className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition text-xs">
+          <Link to="/account" className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition text-xs">
             <User className="h-5 w-5" />
             <span>Mi Cuenta</span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>
