@@ -6,7 +6,7 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
 
 const CartPage = () => {
-  const { items, removeItem, addItem, totalPrice } = useCart();
+  const { items, removeItem, addItem, decrementItem, totalPrice } = useCart();
 
   const grouped = items.reduce<Record<string, typeof items>>((acc, item) => {
     (acc[item.store] ??= []).push(item);
@@ -50,13 +50,11 @@ const CartPage = () => {
                       </div>
                       <div className="flex items-center gap-2 border border-border rounded-lg">
                         <button
-                          onClick={() => {
-                            if (item.qty <= 1) removeItem(item.id);
-                            // For decrement we'd need a decrementItem — for now remove
-                          }}
+                          onClick={() => decrementItem(item.id)}
                           className="p-2 hover:bg-muted transition rounded-l-lg"
                         >
                           <Minus className="h-3.5 w-3.5" />
+                        </button>
                         </button>
                         <span className="text-sm font-semibold w-6 text-center">{item.qty}</span>
                         <button
@@ -93,9 +91,9 @@ const CartPage = () => {
                 <span>Total</span>
                 <span className="text-primary">{fmt(totalPrice)}</span>
               </div>
-              <button className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition">
+              <Link to="/checkout" className="block w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition text-center">
                 Ir a pagar
-              </button>
+              </Link>
               <Link to="/" className="block text-center text-sm text-primary hover:underline">Seguir comprando</Link>
             </div>
           </div>
