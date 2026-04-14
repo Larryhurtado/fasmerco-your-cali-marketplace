@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import TopBar from "@/components/TopBar";
 import MainHeader from "@/components/MainHeader";
-import CategoryNav from "@/components/CategoryNav";
+import MegaMenu from "@/components/MegaMenu";
 import CartDrawer from "@/components/CartDrawer";
 import TrustFooter from "@/components/TrustFooter";
 
@@ -13,7 +13,7 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col">
       <TopBar />
       <MainHeader onCartOpen={() => setCartOpen(true)} />
-      <CategoryNav />
+      <MegaMenu />
       <main className="flex-1">
         <Outlet />
       </main>

@@ -4,7 +4,7 @@ import FeaturedCategories from "@/components/FeaturedCategories";
 import ProductCarouselSection from "@/components/ProductCarouselSection";
 import StoreCarouselSection from "@/components/StoreCarouselSection";
 import PromoBanners from "@/components/PromoBanners";
-import { bestSellerProducts, techProducts } from "@/data/products";
+import { bestSellerProducts, techProducts2 as techProducts } from "@/data/products";
 
 const Index = () => (
   <div className="container mx-auto max-w-[1440px] px-6 py-8 space-y-14">
