@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ArrowUpDown } from "lucide-react";
 import { allProducts } from "@/data/products";
@@ -17,39 +17,68 @@ const sortOptions = [
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q")?.trim() ?? "";
+  const categoryParam = searchParams.get("category")?.trim() ?? "";
+  const subParam = searchParams.get("sub")?.trim() ?? "";
   const queryLower = query.toLowerCase();
 
-  // Detect if query matches a category exactly
-  const matchedCategory = categories.find((c) => c.toLowerCase() === queryLower);
+  // Detect category from query or param
+  const matchedCategory = categoryParam || categories.find((c) => c.toLowerCase() === queryLower) || "";
 
   const [sortBy, setSortBy] = useState("relevance");
   const [selectedStores, setSelectedStores] = useState<string[]>([]);
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [selectedDelivery, setSelectedDelivery] = useState<string[]>([]);
+  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortOpen, setSortOpen] = useState(false);
+
+  // Pre-select subcategory from URL
+  useEffect(() => {
+    if (subParam) {
+      setSelectedSubcategories([subParam]);
+    } else {
+      setSelectedSubcategories([]);
+    }
+  }, [subParam]);
+
+  // Reset filters when category changes
+  useEffect(() => {
+    setSelectedStores([]);
+    setSelectedPrices([]);
+    setSelectedSizes([]);
+    setSelectedColors([]);
+    setSelectedBrands([]);
+  }, [matchedCategory]);
 
   const results = useMemo(() => {
     let filtered = allProducts;
 
-    // If query matches a category, show only that category
+    // Category filter
     if (matchedCategory) {
       filtered = filtered.filter((p) => p.category === matchedCategory);
-    } else {
-      // General search
+    } else if (queryLower) {
       filtered = filtered.filter(
         (p) =>
           p.name.toLowerCase().includes(queryLower) ||
           p.store.toLowerCase().includes(queryLower) ||
-          p.category.toLowerCase().includes(queryLower)
+          p.category.toLowerCase().includes(queryLower) ||
+          p.subcategory.toLowerCase().includes(queryLower)
       );
     }
 
-    // Apply store filter
+    // Subcategory filter
+    if (selectedSubcategories.length > 0) {
+      filtered = filtered.filter((p) => selectedSubcategories.includes(p.subcategory));
+    }
+
+    // Store filter
     if (selectedStores.length > 0) {
       filtered = filtered.filter((p) => selectedStores.includes(p.store));
     }
 
-    // Apply price filter
+    // Price filter
     if (selectedPrices.length > 0) {
       filtered = filtered.filter((p) =>
         selectedPrices.some((range) => {
@@ -62,18 +91,16 @@ const SearchPage = () => {
     // Sort
     const sorted = [...filtered];
     switch (sortBy) {
-      case "price-asc":
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case "rating":
-        sorted.sort((a, b) => b.rating - a.rating);
-        break;
+      case "price-asc": sorted.sort((a, b) => a.price - b.price); break;
+      case "price-desc": sorted.sort((a, b) => b.price - a.price); break;
+      case "rating": sorted.sort((a, b) => b.rating - a.rating); break;
     }
     return sorted;
-  }, [queryLower, matchedCategory, selectedStores, selectedPrices, sortBy]);
+  }, [queryLower, matchedCategory, selectedSubcategories, selectedStores, selectedPrices, sortBy]);
+
+  const pageTitle = selectedSubcategories.length === 1
+    ? selectedSubcategories[0]
+    : matchedCategory || query;
 
   return (
     <div className="container mx-auto max-w-[1440px] px-6 py-8">
@@ -81,7 +108,17 @@ const SearchPage = () => {
         <div>
           <h1 className="text-xl font-bold">
             {matchedCategory ? (
-              <>Categoría: <span className="text-primary">{matchedCategory}</span></>
+              <>
+                {selectedSubcategories.length === 1 ? (
+                  <>
+                    <span className="text-muted-foreground">{matchedCategory}</span>
+                    <span className="mx-2 text-muted-foreground">/</span>
+                    <span className="text-primary">{selectedSubcategories[0]}</span>
+                  </>
+                ) : (
+                  <>Categoría: <span className="text-primary">{matchedCategory}</span></>
+                )}
+              </>
             ) : (
               <>Resultados para: <span className="text-primary">"{query}"</span></>
             )}
@@ -89,7 +126,7 @@ const SearchPage = () => {
           <p className="text-sm text-muted-foreground mt-0.5">{results.length} producto(s) encontrado(s)</p>
         </div>
 
-        {/* Sort by */}
+        {/* Sort */}
         <div className="relative">
           <button
             onClick={() => setSortOpen(!sortOpen)}
@@ -116,13 +153,21 @@ const SearchPage = () => {
 
       <div className="flex gap-8">
         <Filters
-          category={matchedCategory}
+          category={matchedCategory || undefined}
           selectedStores={selectedStores}
           onStoreChange={setSelectedStores}
           selectedPrices={selectedPrices}
           onPriceChange={setSelectedPrices}
           selectedDelivery={selectedDelivery}
           onDeliveryChange={setSelectedDelivery}
+          selectedSubcategories={selectedSubcategories}
+          onSubcategoryChange={setSelectedSubcategories}
+          selectedSizes={selectedSizes}
+          onSizeChange={setSelectedSizes}
+          selectedColors={selectedColors}
+          onColorChange={setSelectedColors}
+          selectedBrands={selectedBrands}
+          onBrandChange={setSelectedBrands}
         />
         {results.length === 0 ? (
           <p className="text-muted-foreground py-12 text-center flex-1">No encontramos productos para tu búsqueda.</p>
