@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { Star, MapPin } from "lucide-react";
 import { getStoreBySlug } from "@/data/stores";
-import { allProducts, flashProducts } from "@/data/products";
+import { allProducts } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
 const StorePage = () => {
@@ -17,7 +17,7 @@ const StorePage = () => {
     );
   }
 
-  const storeProducts = [...allProducts, ...flashProducts].filter(
+  const storeProducts = allProducts.filter(
     (p) => p.store.toLowerCase().replace(/\s/g, "") === slug
   );
 

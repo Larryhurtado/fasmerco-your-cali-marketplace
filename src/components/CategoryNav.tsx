@@ -1,5 +1,5 @@
 import { Laptop, Shirt, Home, Sparkles, PawPrint, Dumbbell, MapPin } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const categories = [
   { name: "Tecnología", icon: Laptop },
@@ -26,10 +26,10 @@ const CategoryNav = () => {
             {cat.name}
           </button>
         ))}
-        <button className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold text-primary-foreground bg-primary rounded-md hover:opacity-90 transition whitespace-nowrap ml-auto">
+        <Link to="/stores" className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold text-primary-foreground bg-primary rounded-md hover:opacity-90 transition whitespace-nowrap ml-auto">
           <MapPin className="h-4 w-4" />
           Tiendas de Cali
-        </button>
+        </Link>
       </div>
     </nav>
   );
