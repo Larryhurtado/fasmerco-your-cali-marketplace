@@ -1,0 +1,102 @@
+import { useNavigate } from "react-router-dom";
+import { Store, User, ShoppingBag, TrendingUp, Package, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/30 flex items-center justify-center p-4">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/40 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-4xl">
+        {/* Logo */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            <span className="text-primary">Fas</span>
+            <span className="text-foreground">merco</span>
+          </h1>
+          <p className="text-muted-foreground mt-2 text-sm md:text-base">El marketplace de Cali para el mundo</p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          {/* Comprador */}
+          <button
+            onClick={() => navigate("/")}
+            className="group bg-card border border-border rounded-2xl p-8 text-left hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 space-y-5"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-1">Soy Comprador</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Explora miles de productos de tiendas locales en Cali con envíos rápidos y precios increíbles.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: ShoppingBag, text: "Comprar" },
+                { icon: Star, text: "Reseñar" },
+                { icon: Package, text: "Rastrear" },
+              ].map((f) => (
+                <span key={f.text} className="inline-flex items-center gap-1.5 text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full">
+                  <f.icon className="h-3 w-3" />
+                  {f.text}
+                </span>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 text-primary text-sm font-semibold group-hover:gap-3 transition-all">
+              Ir a comprar
+              <span className="text-lg">→</span>
+            </div>
+          </button>
+
+          {/* Tienda */}
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="group bg-card border border-border rounded-2xl p-8 text-left hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 space-y-5"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <Store className="h-8 w-8 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-1">Soy Tienda</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Administra tu negocio, sube productos, gestiona pedidos y haz crecer tus ventas desde un solo lugar.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: Package, text: "Inventario" },
+                { icon: TrendingUp, text: "Ventas" },
+                { icon: Store, text: "Mi Tienda" },
+              ].map((f) => (
+                <span key={f.text} className="inline-flex items-center gap-1.5 text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full">
+                  <f.icon className="h-3 w-3" />
+                  {f.text}
+                </span>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 text-primary text-sm font-semibold group-hover:gap-3 transition-all">
+              Ir al Dashboard
+              <span className="text-lg">→</span>
+            </div>
+          </button>
+        </div>
+
+        <p className="text-center text-xs text-muted-foreground mt-8">
+          © 2024 Fasmerco. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
