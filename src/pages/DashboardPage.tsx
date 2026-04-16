@@ -102,6 +102,16 @@ const DashboardPage = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubcategory, setSelectedSubcategory] = useState("");
+  const [orderFilter, setOrderFilter] = useState("Todos");
+  const [orderStatuses, setOrderStatuses] = useState<Record<string, string>>(
+    Object.fromEntries(fakeOrders.map(o => [o.id, o.status]))
+  );
+  const [configToggles, setConfigToggles] = useState<Record<string, boolean>>({
+    "Notificaciones por Email": true,
+    "Notificaciones Push": true,
+    "Modo Vacaciones": false,
+    "Envío Express": true,
+  });
 
   const subcategories = selectedCategory
     ? megamenuData.find((c) => c.name === selectedCategory)?.groups.flatMap((g) => g.items.map((i) => i.name)) || []
