@@ -102,6 +102,16 @@ const DashboardPage = () => {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubcategory, setSelectedSubcategory] = useState("");
+  const [orderFilter, setOrderFilter] = useState("Todos");
+  const [orderStatuses, setOrderStatuses] = useState<Record<string, string>>(
+    Object.fromEntries(fakeOrders.map(o => [o.id, o.status]))
+  );
+  const [configToggles, setConfigToggles] = useState<Record<string, boolean>>({
+    "Notificaciones por Email": true,
+    "Notificaciones Push": true,
+    "Modo Vacaciones": false,
+    "Envío Express": true,
+  });
 
   const subcategories = selectedCategory
     ? megamenuData.find((c) => c.name === selectedCategory)?.groups.flatMap((g) => g.items.map((i) => i.name)) || []
@@ -420,7 +430,7 @@ const DashboardPage = () => {
             <h2 className="text-2xl font-bold text-foreground">Pedidos</h2>
             <div className="flex flex-wrap gap-2">
               {["Todos", "Pendiente", "Enviado", "Entregado"].map((f) => (
-                <Button key={f} variant={f === "Todos" ? "default" : "outline"} size="sm">{f}</Button>
+                <Button key={f} variant={orderFilter === f ? "default" : "outline"} size="sm" onClick={() => setOrderFilter(f)}>{f}</Button>
               ))}
             </div>
             <div className="bg-card border border-border rounded-xl overflow-hidden">
@@ -435,20 +445,23 @@ const DashboardPage = () => {
                   <th className="text-left p-4 font-medium">Acciones</th>
                 </tr></thead>
                 <tbody>
-                  {fakeOrders.map((o) => (
+                  {fakeOrders.filter(o => orderFilter === "Todos" || orderStatuses[o.id] === orderFilter).map((o) => (
                     <tr key={o.id} className="border-b border-border last:border-0 hover:bg-muted/20">
                       <td className="p-4 font-medium text-foreground">{o.id}</td>
                       <td className="p-4 text-muted-foreground">{o.customer}</td>
                       <td className="p-4 text-muted-foreground">{o.date}</td>
                       <td className="p-4 text-muted-foreground">{o.items}</td>
                       <td className="p-4 font-medium text-foreground">{formatCOP(o.total)}</td>
-                      <td className="p-4"><span className={`text-xs font-medium px-2.5 py-1 rounded-full ${orderStatusColor[o.status]}`}>{o.status}</span></td>
+                      <td className="p-4"><span className={`text-xs font-medium px-2.5 py-1 rounded-full ${orderStatusColor[orderStatuses[o.id]]}`}>{orderStatuses[o.id]}</span></td>
                       <td className="p-4">
-                        <select className="text-xs border border-input rounded-md px-2 py-1 bg-background">
-                          <option>Cambiar estado</option>
-                          <option>Pendiente</option>
-                          <option>Enviado</option>
-                          <option>Entregado</option>
+                        <select
+                          value={orderStatuses[o.id]}
+                          onChange={(e) => setOrderStatuses(prev => ({ ...prev, [o.id]: e.target.value }))}
+                          className="text-xs border border-input rounded-md px-2 py-1 bg-background"
+                        >
+                          <option value="Pendiente">Pendiente</option>
+                          <option value="Enviado">Enviado</option>
+                          <option value="Entregado">Entregado</option>
                         </select>
                       </td>
                     </tr>
@@ -630,22 +643,28 @@ const DashboardPage = () => {
           <div className="space-y-6 max-w-2xl">
             <h2 className="text-2xl font-bold text-foreground">Configuración</h2>
             <div className="bg-card border border-border rounded-xl divide-y divide-border">
-              {[
-                { label: "Notificaciones por Email", desc: "Recibe alertas de nuevos pedidos", toggle: true },
-                { label: "Notificaciones Push", desc: "Notificaciones en tiempo real", toggle: true },
-                { label: "Modo Vacaciones", desc: "Pausar la tienda temporalmente", toggle: false },
-                { label: "Envío Express", desc: "Habilitar entrega el mismo día", toggle: true },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center justify-between p-5">
-                  <div>
-                    <p className="font-medium text-foreground text-sm">{s.label}</p>
-                    <p className="text-xs text-muted-foreground">{s.desc}</p>
+              {Object.entries(configToggles).map(([label, enabled]) => {
+                const desc: Record<string, string> = {
+                  "Notificaciones por Email": "Recibe alertas de nuevos pedidos",
+                  "Notificaciones Push": "Notificaciones en tiempo real",
+                  "Modo Vacaciones": "Pausar la tienda temporalmente",
+                  "Envío Express": "Habilitar entrega el mismo día",
+                };
+                return (
+                  <div key={label} className="flex items-center justify-between p-5">
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{label}</p>
+                      <p className="text-xs text-muted-foreground">{desc[label]}</p>
+                    </div>
+                    <button
+                      onClick={() => setConfigToggles(prev => ({ ...prev, [label]: !prev[label] }))}
+                      className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${enabled ? "bg-primary" : "bg-border"}`}
+                    >
+                      <span className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${enabled ? "translate-x-5" : "translate-x-0"}`} />
+                    </button>
                   </div>
-                  <button className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${s.toggle ? "bg-primary" : "bg-border"}`}>
-                    <span className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${s.toggle ? "translate-x-5" : "translate-x-0"}`} />
-                  </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="bg-card border border-destructive/20 rounded-xl p-5 space-y-3">

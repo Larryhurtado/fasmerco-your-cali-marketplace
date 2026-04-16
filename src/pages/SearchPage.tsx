@@ -21,7 +21,6 @@ const SearchPage = () => {
   const subParam = searchParams.get("sub")?.trim() ?? "";
   const queryLower = query.toLowerCase();
 
-  // Detect category from query or param
   const matchedCategory = categoryParam || categories.find((c) => c.toLowerCase() === queryLower) || "";
 
   const [sortBy, setSortBy] = useState("relevance");
@@ -34,7 +33,6 @@ const SearchPage = () => {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortOpen, setSortOpen] = useState(false);
 
-  // Pre-select subcategory from URL
   useEffect(() => {
     if (subParam) {
       setSelectedSubcategories([subParam]);
@@ -43,7 +41,6 @@ const SearchPage = () => {
     }
   }, [subParam]);
 
-  // Reset filters when category changes
   useEffect(() => {
     setSelectedStores([]);
     setSelectedPrices([]);
@@ -88,6 +85,11 @@ const SearchPage = () => {
       );
     }
 
+    // Brand filter (Tecnología)
+    if (selectedBrands.length > 0) {
+      filtered = filtered.filter((p) => p.brand && selectedBrands.includes(p.brand));
+    }
+
     // Sort
     const sorted = [...filtered];
     switch (sortBy) {
@@ -96,11 +98,7 @@ const SearchPage = () => {
       case "rating": sorted.sort((a, b) => b.rating - a.rating); break;
     }
     return sorted;
-  }, [queryLower, matchedCategory, selectedSubcategories, selectedStores, selectedPrices, sortBy]);
-
-  const pageTitle = selectedSubcategories.length === 1
-    ? selectedSubcategories[0]
-    : matchedCategory || query;
+  }, [queryLower, matchedCategory, selectedSubcategories, selectedStores, selectedPrices, selectedBrands, sortBy]);
 
   return (
     <div className="container mx-auto max-w-[1440px] px-6 py-8">
