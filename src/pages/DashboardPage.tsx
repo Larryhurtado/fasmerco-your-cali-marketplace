@@ -430,7 +430,7 @@ const DashboardPage = () => {
             <h2 className="text-2xl font-bold text-foreground">Pedidos</h2>
             <div className="flex flex-wrap gap-2">
               {["Todos", "Pendiente", "Enviado", "Entregado"].map((f) => (
-                <Button key={f} variant={f === "Todos" ? "default" : "outline"} size="sm">{f}</Button>
+                <Button key={f} variant={orderFilter === f ? "default" : "outline"} size="sm" onClick={() => setOrderFilter(f)}>{f}</Button>
               ))}
             </div>
             <div className="bg-card border border-border rounded-xl overflow-hidden">
@@ -445,20 +445,23 @@ const DashboardPage = () => {
                   <th className="text-left p-4 font-medium">Acciones</th>
                 </tr></thead>
                 <tbody>
-                  {fakeOrders.map((o) => (
+                  {fakeOrders.filter(o => orderFilter === "Todos" || orderStatuses[o.id] === orderFilter).map((o) => (
                     <tr key={o.id} className="border-b border-border last:border-0 hover:bg-muted/20">
                       <td className="p-4 font-medium text-foreground">{o.id}</td>
                       <td className="p-4 text-muted-foreground">{o.customer}</td>
                       <td className="p-4 text-muted-foreground">{o.date}</td>
                       <td className="p-4 text-muted-foreground">{o.items}</td>
                       <td className="p-4 font-medium text-foreground">{formatCOP(o.total)}</td>
-                      <td className="p-4"><span className={`text-xs font-medium px-2.5 py-1 rounded-full ${orderStatusColor[o.status]}`}>{o.status}</span></td>
+                      <td className="p-4"><span className={`text-xs font-medium px-2.5 py-1 rounded-full ${orderStatusColor[orderStatuses[o.id]]}`}>{orderStatuses[o.id]}</span></td>
                       <td className="p-4">
-                        <select className="text-xs border border-input rounded-md px-2 py-1 bg-background">
-                          <option>Cambiar estado</option>
-                          <option>Pendiente</option>
-                          <option>Enviado</option>
-                          <option>Entregado</option>
+                        <select
+                          value={orderStatuses[o.id]}
+                          onChange={(e) => setOrderStatuses(prev => ({ ...prev, [o.id]: e.target.value }))}
+                          className="text-xs border border-input rounded-md px-2 py-1 bg-background"
+                        >
+                          <option value="Pendiente">Pendiente</option>
+                          <option value="Enviado">Enviado</option>
+                          <option value="Entregado">Entregado</option>
                         </select>
                       </td>
                     </tr>
