@@ -643,22 +643,28 @@ const DashboardPage = () => {
           <div className="space-y-6 max-w-2xl">
             <h2 className="text-2xl font-bold text-foreground">Configuración</h2>
             <div className="bg-card border border-border rounded-xl divide-y divide-border">
-              {[
-                { label: "Notificaciones por Email", desc: "Recibe alertas de nuevos pedidos", toggle: true },
-                { label: "Notificaciones Push", desc: "Notificaciones en tiempo real", toggle: true },
-                { label: "Modo Vacaciones", desc: "Pausar la tienda temporalmente", toggle: false },
-                { label: "Envío Express", desc: "Habilitar entrega el mismo día", toggle: true },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center justify-between p-5">
-                  <div>
-                    <p className="font-medium text-foreground text-sm">{s.label}</p>
-                    <p className="text-xs text-muted-foreground">{s.desc}</p>
+              {Object.entries(configToggles).map(([label, enabled]) => {
+                const desc: Record<string, string> = {
+                  "Notificaciones por Email": "Recibe alertas de nuevos pedidos",
+                  "Notificaciones Push": "Notificaciones en tiempo real",
+                  "Modo Vacaciones": "Pausar la tienda temporalmente",
+                  "Envío Express": "Habilitar entrega el mismo día",
+                };
+                return (
+                  <div key={label} className="flex items-center justify-between p-5">
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{label}</p>
+                      <p className="text-xs text-muted-foreground">{desc[label]}</p>
+                    </div>
+                    <button
+                      onClick={() => setConfigToggles(prev => ({ ...prev, [label]: !prev[label] }))}
+                      className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${enabled ? "bg-primary" : "bg-border"}`}
+                    >
+                      <span className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${enabled ? "translate-x-5" : "translate-x-0"}`} />
+                    </button>
                   </div>
-                  <button className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${s.toggle ? "bg-primary" : "bg-border"}`}>
-                    <span className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${s.toggle ? "translate-x-5" : "translate-x-0"}`} />
-                  </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="bg-card border border-destructive/20 rounded-xl p-5 space-y-3">
