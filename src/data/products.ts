@@ -9,37 +9,38 @@ export interface Product {
   verified: boolean;
   category: string;
   subcategory: string;
+  brand?: string;
 }
 
 /* ── Tecnología ── */
 const techProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[] = [
   // Móviles > Smartphones
-  { name: "Samsung Galaxy A54 5G", price: 1299000, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Smartphones" },
-  { name: "Xiaomi Redmi Note 13", price: 899000, image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Smartphones" },
-  { name: "iPhone 15 Pro Max", price: 5499000, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Smartphones" },
+  { name: "Samsung Galaxy A54 5G", price: 1299000, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Smartphones", brand: "Samsung" },
+  { name: "Xiaomi Redmi Note 13", price: 899000, image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Smartphones", brand: "Xiaomi" },
+  { name: "iPhone 15 Pro Max", price: 5499000, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Smartphones", brand: "Apple" },
   // Móviles > Tablets
-  { name: "Tablet Samsung Galaxy Tab A9", price: 749000, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Tablets" },
-  { name: "iPad 10ª Generación", price: 2199000, image: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Tablets" },
+  { name: "Tablet Samsung Galaxy Tab A9", price: 749000, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Tablets", brand: "Samsung" },
+  { name: "iPad 10ª Generación", price: 2199000, image: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Tablets", brand: "Apple" },
   // Móviles > Smartwatches
-  { name: "Reloj Smartwatch Ultra", price: 189000, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Smartwatches" },
-  { name: "Apple Watch SE 2", price: 1299000, image: "https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Smartwatches" },
+  { name: "Reloj Smartwatch Ultra", price: 189000, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Smartwatches", brand: "Xiaomi" },
+  { name: "Apple Watch SE 2", price: 1299000, image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Smartwatches", brand: "Apple" },
   // Accesorios
-  { name: "Cargador Inalámbrico Fast", price: 49000, image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Cargadores y Cables" },
-  { name: "Cable USB-C a Lightning 2m", price: 29000, image: "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Cargadores y Cables" },
-  { name: "Funda iPhone 15 Silicona", price: 35000, image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Fundas (Cases)" },
-  { name: "Protector Pantalla Galaxy A54", price: 15000, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Protectores de Pantalla" },
+  { name: "Cargador Inalámbrico Fast", price: 49000, image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Cargadores y Cables", brand: "Samsung" },
+  { name: "Cable USB-C a Lightning 2m", price: 29000, image: "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Cargadores y Cables", brand: "Apple" },
+  { name: "Funda iPhone 15 Silicona", price: 35000, image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Fundas (Cases)", brand: "Apple" },
+  { name: "Protector Pantalla Galaxy A54", price: 15000, image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Protectores de Pantalla", brand: "Samsung" },
   // Audio
-  { name: "Audífonos Bluetooth Pro", price: 129000, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Audífonos Bluetooth" },
-  { name: "AirPods Pro 2", price: 899000, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Audífonos Bluetooth" },
-  { name: "Parlante Portátil Bass", price: 159000, image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Parlantes Portátiles" },
-  { name: "JBL Flip 6 Portátil", price: 459000, image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Parlantes Portátiles" },
+  { name: "Audífonos Bluetooth Pro", price: 129000, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Audífonos Bluetooth", brand: "JBL" },
+  { name: "AirPods Pro 2", price: 899000, image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Audífonos Bluetooth", brand: "Apple" },
+  { name: "Parlante Portátil Bass", price: 159000, image: "https://images.unsplash.com/photo-1589003077984-894e133dabab?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Parlantes Portátiles", brand: "JBL" },
+  { name: "JBL Flip 6 Portátil", price: 459000, image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Parlantes Portátiles", brand: "JBL" },
   // Computación
-  { name: "Laptop ASUS VivoBook 15", price: 2199000, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Laptops" },
-  { name: "MacBook Air M2", price: 5999000, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Laptops" },
-  { name: "Mouse Inalámbrico RGB", price: 59000, image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Periféricos" },
-  { name: "Teclado Mecánico Compact", price: 189000, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Periféricos" },
-  { name: "Headset Gamer 7.1", price: 179000, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Gaming" },
-  { name: "Silla Gamer Ergonómica", price: 699000, image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Gaming" },
+  { name: "Laptop ASUS VivoBook 15", price: 2199000, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Laptops", brand: "ASUS" },
+  { name: "MacBook Air M2", price: 5999000, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80", store: "ByteStore", category: "Tecnología", subcategory: "Laptops", brand: "Apple" },
+  { name: "Mouse Inalámbrico RGB", price: 59000, image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Periféricos", brand: "Logitech" },
+  { name: "Teclado Mecánico Compact", price: 189000, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80", store: "TechCali", category: "Tecnología", subcategory: "Periféricos", brand: "Logitech" },
+  { name: "Headset Gamer 7.1", price: 179000, image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&q=80", store: "GadgetZone", category: "Tecnología", subcategory: "Gaming", brand: "Logitech" },
+  { name: "Silla Gamer Ergonómica", price: 699000, image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&q=80", store: "ElectroMax", category: "Tecnología", subcategory: "Gaming", brand: "ASUS" },
 ];
 
 /* ── Moda ── */
@@ -56,7 +57,7 @@ const modaProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[] =
   { name: "Camiseta Oversize Premium", price: 55000, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80", store: "StreetVibes", category: "Moda", subcategory: "Camisetas" },
   { name: "Camiseta Básica Pack x3", price: 75000, image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=400&q=80", store: "ModaUrbana", category: "Moda", subcategory: "Camisetas" },
   { name: "Camisa Lino Manga Larga", price: 89000, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80", store: "CaliFashion", category: "Moda", subcategory: "Camisas" },
-  { name: "Jeans Slim Fit Hombre", price: 95000, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", store: "StreetVibes", category: "Moda", subcategory: "Jeans y Bermudas" },
+  { name: "Jeans Slim Fit Hombre", price: 95000, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&q=80", store: "StreetVibes", category: "Moda", subcategory: "Jeans y Bermudas" },
   { name: "Bermuda Cargo Tactical", price: 69000, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&q=80", store: "ModaUrbana", category: "Moda", subcategory: "Jeans y Bermudas" },
   { name: "Chaqueta Bomber Urban", price: 149000, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80", store: "StyleHouse", category: "Moda", subcategory: "Chaquetas" },
   // Calzado
@@ -76,19 +77,19 @@ const bellezaProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[
   { name: "Base de Maquillaje HD", price: 69000, image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Rostro" },
   { name: "Corrector Líquido Pro", price: 35000, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80", store: "GlamCali", category: "Belleza", subcategory: "Rostro" },
   { name: "Máscara de Pestañas Volume", price: 42000, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Ojos" },
-  { name: "Delineador Líquido Negro", price: 25000, image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Ojos" },
+  { name: "Delineador Líquido Negro", price: 25000, image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Ojos" },
   { name: "Labial Matte Long Lasting", price: 32000, image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&q=80", store: "GlamCali", category: "Belleza", subcategory: "Labios" },
   { name: "Gloss Hidratante Cherry", price: 28000, image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&q=80", store: "NaturalGlow", category: "Belleza", subcategory: "Labios" },
-  { name: "Paleta Sombras 18 Tonos", price: 89000, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Paletas de Sombras" },
+  { name: "Paleta Sombras 18 Tonos", price: 89000, image: "https://images.unsplash.com/photo-1583241800698-e8ab01830a07?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Paletas de Sombras" },
   // Cuidado Personal
-  { name: "Set Skincare Premium 5pz", price: 159000, image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Skincare" },
+  { name: "Set Skincare Premium 5pz", price: 159000, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Skincare" },
   { name: "Sérum Vitamina C 30ml", price: 79000, image: "https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=400&q=80", store: "NaturalGlow", category: "Belleza", subcategory: "Skincare" },
-  { name: "Protector Solar SPF50", price: 55000, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Skincare" },
-  { name: "Shampoo Sin Sulfatos", price: 39000, image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80", store: "NaturalGlow", category: "Belleza", subcategory: "Cuidado del Cabello" },
+  { name: "Protector Solar SPF50", price: 55000, image: "https://images.unsplash.com/photo-1532947974358-a218d18d8447?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Skincare" },
+  { name: "Shampoo Sin Sulfatos", price: 39000, image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=400&q=80", store: "NaturalGlow", category: "Belleza", subcategory: "Cuidado del Cabello" },
   { name: "Mascarilla Capilar Keratina", price: 45000, image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=400&q=80", store: "GlamCali", category: "Belleza", subcategory: "Cuidado del Cabello" },
   // Barbería
-  { name: "Máquina Corte Profesional", price: 189000, image: "https://images.unsplash.com/photo-1585747860019-8c62a3b1b53c?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Máquinas de Corte" },
-  { name: "Kit Afeitado Premium", price: 79000, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=80", store: "GlamCali", category: "Belleza", subcategory: "Productos de Afeitado" },
+  { name: "Máquina Corte Profesional", price: 189000, image: "https://images.unsplash.com/photo-1621607505837-5765e2e86e89?w=400&q=80", store: "BeautyLab", category: "Belleza", subcategory: "Máquinas de Corte" },
+  { name: "Kit Afeitado Premium", price: 79000, image: "https://images.unsplash.com/photo-1585747860019-8c62a3b1b53c?w=400&q=80", store: "GlamCali", category: "Belleza", subcategory: "Productos de Afeitado" },
   // Perfumería
   { name: "Perfume Floral 100ml", price: 129000, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=80", store: "NaturalGlow", category: "Belleza", subcategory: "Fragancias Nacionales e Importadas" },
   { name: "Colonia Cítrica Hombre", price: 99000, image: "https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=400&q=80", store: "SkinFirst", category: "Belleza", subcategory: "Fragancias Nacionales e Importadas" },
@@ -97,59 +98,59 @@ const bellezaProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[
 /* ── Mascotas ── */
 const mascotasProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[] = [
   // Perros
-  { name: "Alimento Perro Adulto 15kg", price: 139000, image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Alimento Perros" },
-  { name: "Alimento Cachorro Premium 8kg", price: 99000, image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&q=80", store: "HuellasCali", category: "Mascotas", subcategory: "Alimento Perros" },
-  { name: "Juguete Interactivo Kong", price: 45000, image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80", store: "MascotaFeliz", category: "Mascotas", subcategory: "Juguetes Perros" },
-  { name: "Pelota Lanzador Auto", price: 129000, image: "https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=400&q=80", store: "PetShopValle", category: "Mascotas", subcategory: "Juguetes Perros" },
-  { name: "Cama Ortopédica Perro L", price: 159000, image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Camas y Casas" },
+  { name: "Alimento Perro Adulto 15kg", price: 139000, image: "https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Alimento Perros" },
+  { name: "Alimento Cachorro Premium 8kg", price: 99000, image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&q=80", store: "HuellasCali", category: "Mascotas", subcategory: "Alimento Perros" },
+  { name: "Juguete Interactivo Kong", price: 45000, image: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=400&q=80", store: "MascotaFeliz", category: "Mascotas", subcategory: "Juguetes Perros" },
+  { name: "Pelota Lanzador Auto", price: 129000, image: "https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=400&q=80", store: "PetShopValle", category: "Mascotas", subcategory: "Juguetes Perros" },
+  { name: "Cama Ortopédica Perro L", price: 159000, image: "https://images.unsplash.com/photo-1541599468348-e603c130c5f0?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Camas y Casas" },
   { name: "Casa Perro Madera M", price: 249000, image: "https://images.unsplash.com/photo-1583337130417-13104dec14a3?w=400&q=80", store: "HuellasCali", category: "Mascotas", subcategory: "Camas y Casas" },
-  { name: "Collar LED Mascota", price: 29000, image: "https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=400&q=80", store: "MascotaFeliz", category: "Mascotas", subcategory: "Correas y Collares" },
-  { name: "Arnés Reflectivo Ajustable", price: 55000, image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Correas y Collares" },
+  { name: "Collar LED Mascota", price: 29000, image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80", store: "MascotaFeliz", category: "Mascotas", subcategory: "Correas y Collares" },
+  { name: "Arnés Reflectivo Ajustable", price: 55000, image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Correas y Collares" },
   // Gatos
   { name: "Alimento Gato Adulto 10kg", price: 119000, image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80", store: "PetShopValle", category: "Mascotas", subcategory: "Alimento Gatos" },
   { name: "Arena Premium Aglutinante 10L", price: 39000, image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&q=80", store: "MascotaFeliz", category: "Mascotas", subcategory: "Arena e Higiene" },
   { name: "Rascador Torre Gato 3 Niveles", price: 189000, image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&q=80", store: "HuellasCali", category: "Mascotas", subcategory: "Rascadores" },
   // Salud
   { name: "Vitaminas Perro Senior", price: 49000, image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&q=80", store: "PetWorld", category: "Mascotas", subcategory: "Vitaminas Mascotas" },
-  { name: "Limpiador Enzimático Mascotas", price: 35000, image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&q=80", store: "PetShopValle", category: "Mascotas", subcategory: "Productos de Limpieza" },
+  { name: "Limpiador Enzimático Mascotas", price: 35000, image: "https://images.unsplash.com/photo-1450778869180-e59f0b958780?w=400&q=80", store: "PetShopValle", category: "Mascotas", subcategory: "Productos de Limpieza" },
 ];
 
 /* ── Hogar ── */
 const hogarProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[] = [
   // Cocina
-  { name: "Set Utensilios Silicona 8pz", price: 69000, image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Utensilios" },
-  { name: "Juego Ollas Antiadherente 5pz", price: 189000, image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80", store: "CasaBella", category: "Hogar", subcategory: "Utensilios" },
-  { name: "Air Fryer Digital 5.5L", price: 279000, image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
-  { name: "Licuadora Turbo 1200W", price: 189000, image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&q=80", store: "ConfortHome", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
-  { name: "Cafetera Espresso Automática", price: 349000, image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
+  { name: "Set Utensilios Silicona 8pz", price: 69000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Utensilios" },
+  { name: "Juego Ollas Antiadherente 5pz", price: 189000, image: "https://images.unsplash.com/photo-1584990347449-a6d1ec729b7e?w=400&q=80", store: "CasaBella", category: "Hogar", subcategory: "Utensilios" },
+  { name: "Air Fryer Digital 5.5L", price: 279000, image: "https://images.unsplash.com/photo-1648655552233-1ba71068ae00?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
+  { name: "Licuadora Turbo 1200W", price: 189000, image: "https://images.unsplash.com/photo-1570222094714-4e5f4e014e63?w=400&q=80", store: "ConfortHome", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
+  { name: "Cafetera Espresso Automática", price: 349000, image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Pequeños Electrodomésticos" },
   // Decoración
-  { name: "Tira LED RGB 10m WiFi", price: 49000, image: "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Iluminación LED" },
+  { name: "Tira LED RGB 10m WiFi", price: 49000, image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Iluminación LED" },
   { name: "Lámpara de Mesa Nordic", price: 79000, image: "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=400&q=80", store: "CasaBella", category: "Hogar", subcategory: "Iluminación LED" },
   { name: "Cuadro Decorativo Set x3", price: 89000, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Cuadros" },
   { name: "Cojín Decorativo Velvet", price: 35000, image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80", store: "ConfortHome", category: "Hogar", subcategory: "Cojines" },
-  { name: "Cojín Boho Set x2", price: 59000, image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80", store: "CasaBella", category: "Hogar", subcategory: "Cojines" },
+  { name: "Cojín Boho Set x2", price: 59000, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80", store: "CasaBella", category: "Hogar", subcategory: "Cojines" },
   // Organización
-  { name: "Set Cajas Organizadoras x4", price: 55000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Cajas Organizadoras" },
+  { name: "Set Cajas Organizadoras x4", price: 55000, image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Cajas Organizadoras" },
   { name: "Organizador Closet Bambú", price: 99000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80", store: "ConfortHome", category: "Hogar", subcategory: "Cajas Organizadoras" },
   { name: "Perchero Pared Industrial", price: 69000, image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400&q=80", store: "DecoValle", category: "Hogar", subcategory: "Percheros y Armarios" },
-  { name: "Armario Portátil Tela", price: 129000, image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Percheros y Armarios" },
+  { name: "Armario Portátil Tela", price: 129000, image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=400&q=80", store: "HogarPlus", category: "Hogar", subcategory: "Percheros y Armarios" },
 ];
 
 /* ── Deportes ── */
 const deportesProducts: Omit<Product, "id" | "rating" | "verified" | "oldPrice">[] = [
   // Ropa Deportiva
   { name: "Conjunto Gym Mujer 2pz", price: 89000, image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=80", store: "SportZone", category: "Deportes", subcategory: "Conjuntos Gym" },
-  { name: "Leggins Deportivos Compresión", price: 59000, image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Conjuntos Gym" },
+  { name: "Leggins Deportivos Compresión", price: 59000, image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Conjuntos Gym" },
   { name: "Camiseta Dry-Fit Pro", price: 45000, image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&q=80", store: "RunnersPro", category: "Deportes", subcategory: "Camisetas Dry-Fit" },
-  { name: "Tank Top Gym Hombre", price: 35000, image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&q=80", store: "AthleticShop", category: "Deportes", subcategory: "Camisetas Dry-Fit" },
+  { name: "Tank Top Gym Hombre", price: 35000, image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&q=80", store: "AthleticShop", category: "Deportes", subcategory: "Camisetas Dry-Fit" },
   // Equipamiento
   { name: "Mancuernas Ajustables 20kg", price: 299000, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Pesas y Mancuernas" },
-  { name: "Pesa Rusa Kettlebell 12kg", price: 99000, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80", store: "SportZone", category: "Deportes", subcategory: "Pesas y Mancuernas" },
-  { name: "Banda Resistencia Set x5", price: 39000, image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=80", store: "RunnersPro", category: "Deportes", subcategory: "Bandas Elásticas" },
+  { name: "Pesa Rusa Kettlebell 12kg", price: 99000, image: "https://images.unsplash.com/photo-1526401485004-46910ecc8e51?w=400&q=80", store: "SportZone", category: "Deportes", subcategory: "Pesas y Mancuernas" },
+  { name: "Banda Resistencia Set x5", price: 39000, image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&q=80", store: "RunnersPro", category: "Deportes", subcategory: "Bandas Elásticas" },
   { name: "Esterilla Yoga Premium", price: 69000, image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80", store: "AthleticShop", category: "Deportes", subcategory: "Mats de Yoga" },
-  { name: "Mat Yoga Antideslizante 6mm", price: 55000, image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Mats de Yoga" },
+  { name: "Mat Yoga Antideslizante 6mm", price: 55000, image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Mats de Yoga" },
   // Suplementación
-  { name: "Proteína Whey Isolate 2lb", price: 159000, image: "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400&q=80", store: "SportZone", category: "Deportes", subcategory: "Proteínas" },
+  { name: "Proteína Whey Isolate 2lb", price: 159000, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2c760?w=400&q=80", store: "SportZone", category: "Deportes", subcategory: "Proteínas" },
   { name: "Proteína Vegana 1kg", price: 129000, image: "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400&q=80", store: "RunnersPro", category: "Deportes", subcategory: "Proteínas" },
   { name: "Creatina Monohidrato 300g", price: 89000, image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&q=80", store: "FitCali", category: "Deportes", subcategory: "Creatinas" },
   { name: "Shaker Mezclador 700ml", price: 25000, image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400&q=80", store: "AthleticShop", category: "Deportes", subcategory: "Shakers" },

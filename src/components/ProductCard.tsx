@@ -1,6 +1,5 @@
-import { Star, BadgeCheck } from "lucide-react";
+import { Star, BadgeCheck, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/data/products";
 
@@ -12,7 +11,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   const storeSlug = product.store.toLowerCase().replace(/\s/g, "");
 
   return (
-    <div className="group bg-card rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow relative">
+    <div className="group bg-card rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow">
       <Link to={`/product/${product.id}`}>
         <div className="relative aspect-square overflow-hidden bg-muted">
           <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -28,19 +27,21 @@ const ProductCard = ({ product }: { product: Product }) => {
           )}
         </div>
       </Link>
-      {/* Hover add-to-cart */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          addItem({ id: product.id, name: product.name, price: product.price, image: product.image, store: product.store });
-        }}
-        className="absolute top-[calc(50%-16px)] right-2 bg-primary text-primary-foreground p-2 rounded-md opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all shadow-md hover:opacity-90 z-10"
-      >
-        <ShoppingCart className="h-4 w-4" />
-      </button>
 
-      <div className="p-3 space-y-1">
-        <Link to={`/product/${product.id}`} className="text-sm font-semibold leading-snug line-clamp-2 hover:text-primary transition">{product.name}</Link>
+      <div className="p-3 space-y-1.5">
+        <div className="flex items-start justify-between gap-2">
+          <Link to={`/product/${product.id}`} className="text-sm font-semibold leading-snug line-clamp-2 hover:text-primary transition flex-1">{product.name}</Link>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              addItem({ id: product.id, name: product.name, price: product.price, image: product.image, store: product.store });
+            }}
+            className="flex-shrink-0 bg-primary text-primary-foreground p-1.5 rounded-md hover:opacity-90 transition shadow-sm"
+            title="Agregar al carrito"
+          >
+            <ShoppingCart className="h-3.5 w-3.5" />
+          </button>
+        </div>
         <div className="flex items-baseline gap-2">
           <span className="text-base font-bold text-primary">{fmt(product.price)}</span>
           {product.oldPrice && <span className="text-xs text-muted-foreground line-through">{fmt(product.oldPrice)}</span>}

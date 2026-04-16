@@ -1,15 +1,41 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  User, MapPin, Package, Heart, CreditCard, ShieldCheck, Bell, ChevronRight, Star, BadgeCheck, LogOut, Settings, HelpCircle
+  User, MapPin, Package, Heart, CreditCard, ShieldCheck, Bell, ChevronRight, Star, BadgeCheck, LogOut, Settings, HelpCircle, X, Truck, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const fakeOrders = [
-  { id: "ORD-20241201", date: "1 Dic 2024", status: "Entregado", total: 189000, items: 2, store: "TechCali" },
-  { id: "ORD-20241128", date: "28 Nov 2024", status: "En camino", total: 95000, items: 1, store: "ModaUrbana" },
-  { id: "ORD-20241115", date: "15 Nov 2024", status: "Entregado", total: 320000, items: 3, store: "ElectroMax" },
+  {
+    id: "ORD-20241201", date: "1 Dic 2024", status: "Entregado", total: 189000, items: 2, store: "TechCali",
+    products: [
+      { name: "Audífonos Bluetooth Pro", qty: 1, price: 129000, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&q=80" },
+      { name: "Cargador Inalámbrico Fast", qty: 1, price: 49000, image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=80&q=80" },
+    ],
+    address: "Calle 15 #45-30, Barrio Granada, Cali",
+    tracking: "COO-2024120145",
+    deliveredDate: "3 Dic 2024",
+  },
+  {
+    id: "ORD-20241128", date: "28 Nov 2024", status: "En camino", total: 95000, items: 1, store: "ModaUrbana",
+    products: [
+      { name: "Jeans Slim Fit Hombre", qty: 1, price: 95000, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=80&q=80" },
+    ],
+    address: "Av 6N #23-50, Edificio Plaza, Cali",
+    tracking: "COO-2024112833",
+    deliveredDate: null,
+  },
+  {
+    id: "ORD-20241115", date: "15 Nov 2024", status: "Entregado", total: 320000, items: 3, store: "ElectroMax",
+    products: [
+      { name: "Teclado Mecánico Compact", qty: 1, price: 189000, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=80&q=80" },
+      { name: "Mouse Inalámbrico RGB", qty: 1, price: 59000, image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=80&q=80" },
+      { name: "Protector Pantalla", qty: 1, price: 15000, image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=80&q=80" },
+    ],
+    address: "Calle 15 #45-30, Barrio Granada, Cali",
+    tracking: "COO-2024111520",
+    deliveredDate: "18 Nov 2024",
+  },
 ];
 
 const fakeAddresses = [
@@ -23,8 +49,12 @@ const statusColor: Record<string, string> = {
   "Procesando": "bg-primary/10 text-primary",
 };
 
+const formatCOP = (n: number) =>
+  new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
+
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("pedidos");
+  const [selectedOrder, setSelectedOrder] = useState<typeof fakeOrders[0] | null>(null);
 
   const sidebarLinks = [
     { icon: Package, label: "Mis Pedidos", tab: "pedidos" },
@@ -48,7 +78,6 @@ const AccountPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
         {/* Sidebar */}
         <aside className="space-y-4">
-          {/* Profile Card */}
           <div className="bg-card border border-border rounded-xl p-6 text-center space-y-3">
             <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
               <User className="h-10 w-10 text-primary" />
@@ -63,16 +92,11 @@ const AccountPage = () => {
             </div>
           </div>
 
-          {/* Navigation */}
           <nav className="bg-card border border-border rounded-xl overflow-hidden">
             {sidebarLinks.map((link) => {
               if (link.href) {
                 return (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className="flex items-center gap-3 px-5 py-3.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition border-b border-border last:border-0"
-                  >
+                  <Link key={link.label} to={link.href} className="flex items-center gap-3 px-5 py-3.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition border-b border-border last:border-0">
                     <link.icon className="h-4.5 w-4.5" />
                     <span className="flex-1">{link.label}</span>
                     <ChevronRight className="h-4 w-4" />
@@ -80,9 +104,7 @@ const AccountPage = () => {
                 );
               }
               return (
-                <button
-                  key={link.label}
-                  onClick={() => setActiveTab(link.tab!)}
+                <button key={link.label} onClick={() => setActiveTab(link.tab!)}
                   className={`w-full flex items-center gap-3 px-5 py-3.5 text-sm transition border-b border-border last:border-0
                     ${activeTab === link.tab ? "bg-primary/5 text-primary font-medium" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
                 >
@@ -100,7 +122,7 @@ const AccountPage = () => {
         </aside>
 
         {/* Main Content */}
-        <div className="space-y-6">
+        <div className="space-y-6 relative">
           {/* Pedidos */}
           {activeTab === "pedidos" && (
             <div>
@@ -119,15 +141,85 @@ const AccountPage = () => {
                         <p className="text-sm text-muted-foreground">{order.date} · {order.items} producto(s) · {order.store}</p>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="font-bold text-foreground">
-                          {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(order.total)}
-                        </span>
-                        <Button variant="outline" size="sm">Ver detalle</Button>
+                        <span className="font-bold text-foreground">{formatCOP(order.total)}</span>
+                        <Button variant="outline" size="sm" onClick={() => setSelectedOrder(order)}>Ver detalle</Button>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {/* Order Detail Modal */}
+              {selectedOrder && (
+                <div className="fixed inset-0 bg-foreground/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedOrder(null)}>
+                  <div className="bg-background border border-border rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-5 border-b border-border">
+                      <div>
+                        <h3 className="font-bold text-foreground text-lg">{selectedOrder.id}</h3>
+                        <p className="text-xs text-muted-foreground">{selectedOrder.date}</p>
+                      </div>
+                      <button onClick={() => setSelectedOrder(null)} className="p-1.5 rounded-lg hover:bg-muted transition">
+                        <X className="h-5 w-5 text-muted-foreground" />
+                      </button>
+                    </div>
+
+                    <div className="p-5 space-y-5">
+                      {/* Status */}
+                      <div className="flex items-center gap-3 bg-muted/50 rounded-xl p-4">
+                        <div className={`p-2 rounded-full ${selectedOrder.status === "Entregado" ? "bg-success/10" : "bg-warning/10"}`}>
+                          {selectedOrder.status === "Entregado" ? <Package className="h-5 w-5 text-success" /> : <Truck className="h-5 w-5 text-warning" />}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground text-sm">{selectedOrder.status}</p>
+                          {selectedOrder.deliveredDate ? (
+                            <p className="text-xs text-muted-foreground">Entregado el {selectedOrder.deliveredDate}</p>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">Estimado: 1-2 días hábiles</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Products */}
+                      <div>
+                        <h4 className="font-semibold text-foreground text-sm mb-3">Productos</h4>
+                        <div className="space-y-3">
+                          {selectedOrder.products.map((item, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                              <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover" />
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-foreground">{item.name}</p>
+                                <p className="text-xs text-muted-foreground">Cant: {item.qty}</p>
+                              </div>
+                              <span className="text-sm font-semibold text-foreground">{formatCOP(item.price)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Shipping */}
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-foreground text-sm">Envío</h4>
+                        <div className="bg-muted/30 rounded-lg p-3 space-y-1.5">
+                          <div className="flex items-center gap-2 text-sm">
+                            <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
+                            <span className="text-muted-foreground">{selectedOrder.address}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm">
+                            <Truck className="h-3.5 w-3.5 text-muted-foreground" />
+                            <span className="text-muted-foreground">Guía: {selectedOrder.tracking}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Total */}
+                      <div className="flex items-center justify-between pt-3 border-t border-border">
+                        <span className="font-semibold text-foreground">Total</span>
+                        <span className="text-lg font-bold text-primary">{formatCOP(selectedOrder.total)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -144,9 +236,7 @@ const AccountPage = () => {
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-primary" />
                       <span className="font-semibold text-foreground">{addr.label}</span>
-                      {addr.isDefault && (
-                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">Principal</span>
-                      )}
+                      {addr.isDefault && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">Principal</span>}
                     </div>
                     <p className="text-sm text-muted-foreground">{addr.address}</p>
                     <p className="text-sm text-muted-foreground">{addr.city}</p>

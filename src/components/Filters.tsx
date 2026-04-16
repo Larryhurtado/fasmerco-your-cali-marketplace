@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
-import { categoryStoresMap } from "@/data/products";
+import { categoryStoresMap, allProducts } from "@/data/products";
 import { categorySubcategories } from "@/data/megamenu";
 
 interface FiltersProps {
@@ -13,7 +13,6 @@ interface FiltersProps {
   onDeliveryChange?: (delivery: string[]) => void;
   selectedSubcategories?: string[];
   onSubcategoryChange?: (subs: string[]) => void;
-  // Category-specific
   selectedSizes?: string[];
   onSizeChange?: (v: string[]) => void;
   selectedColors?: string[];
@@ -58,8 +57,6 @@ const deliveryOptions = [
 // Category-specific filter options
 const modaSizes = ["XS", "S", "M", "L", "XL", "XXL", "28", "30", "32", "34", "36"];
 const modaColors = ["Negro", "Blanco", "Azul", "Rojo", "Verde", "Beige", "Gris", "Rosa"];
-const techBrands = ["Samsung", "Apple", "Xiaomi", "JBL", "ASUS", "Logitech"];
-const bellezaTypes = ["Piel seca", "Piel grasa", "Piel mixta", "Todo tipo"];
 const deportesSizes = ["S", "M", "L", "XL"];
 
 const toggleArray = (arr: string[], val: string, setter?: (v: string[]) => void) => {
@@ -83,6 +80,14 @@ const Filters = ({
     return categorySubcategories[category] ?? [];
   }, [category]);
 
+  // Dynamically extract brands from products in category
+  const techBrands = useMemo(() => {
+    if (category !== "Tecnología") return [];
+    const brands = new Set<string>();
+    allProducts.filter(p => p.category === "Tecnología" && p.brand).forEach(p => brands.add(p.brand!));
+    return [...brands].sort();
+  }, [category]);
+
   return (
     <aside className="w-56 flex-shrink-0 hidden md:block">
       <div className="sticky top-28 space-y-3 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
@@ -91,7 +96,7 @@ const Filters = ({
           Filtros
         </div>
 
-        {/* Subcategorías - solo si hay categoría */}
+        {/* Subcategorías */}
         {subcategories.length > 0 && (
           <FilterSection title="Subcategoría">
             {subcategories.map((s) => (
@@ -133,19 +138,10 @@ const Filters = ({
         )}
 
         {/* Tecnología: Marca */}
-        {category === "Tecnología" && (
+        {category === "Tecnología" && techBrands.length > 0 && (
           <FilterSection title="Marca">
             {techBrands.map((b) => (
               <CheckItem key={b} label={b} checked={selectedBrands.includes(b)} onChange={() => toggleArray(selectedBrands, b, onBrandChange)} />
-            ))}
-          </FilterSection>
-        )}
-
-        {/* Belleza: Tipo de piel */}
-        {category === "Belleza" && (
-          <FilterSection title="Tipo de piel" defaultOpen={false}>
-            {bellezaTypes.map((t) => (
-              <CheckItem key={t} label={t} checked={false} onChange={() => {}} />
             ))}
           </FilterSection>
         )}
