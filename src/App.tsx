@@ -15,6 +15,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import AccountPage from "./pages/AccountPage";
 import AllStoresPage from "./pages/AllStoresPage";
 import LoginPage from "./pages/LoginPage";
+import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/stores" element={<AllStoresPage />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

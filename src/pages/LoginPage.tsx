@@ -1,18 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { Store, User, ShoppingBag, TrendingUp, Package, Star } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Store, User, ShoppingBag, TrendingUp, Package, Star, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/30 flex items-center justify-center p-4 relative">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/40 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
       </div>
+
+      {/* Auth button - top right */}
+      <Link
+        to="/auth"
+        className="absolute top-6 right-6 z-20 inline-flex items-center gap-2 bg-card border border-border hover:border-primary/40 hover:text-primary text-foreground text-sm font-semibold px-4 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all"
+      >
+        <LogIn className="h-4 w-4" />
+        Iniciar sesión / Registrarse
+      </Link>
 
       <div className="relative z-10 w-full max-w-4xl">
         {/* Logo */}
