@@ -24,7 +24,7 @@ const MainHeader = ({ onCartOpen }: MainHeaderProps) => {
     <header className="bg-background border-b border-border sticky top-0 z-40">
       <div className="container mx-auto flex items-center justify-between py-3 gap-6 max-w-[1440px] px-6">
         <Link to="/">
-          <img src={logo} alt="Fasmerco" className="h-20 w-auto flex-shrink-0" />
+          <img src={logo} alt="Fasmerco" className="h-28 w-auto flex-shrink-0" />
         </Link>
 
         <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
