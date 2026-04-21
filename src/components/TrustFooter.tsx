@@ -54,7 +54,7 @@ const TrustFooter = () => (
     </div>
 
     <div className="border-t border-background/10 text-center py-4 text-xs text-background/40">
-      © 2026 Fasmerco — Fast + Mercado + Colombia. Todos los derechos reservados.
+      © 2026 Fasmerco. Todos los derechos reservados.
     </div>
   </footer>
 );

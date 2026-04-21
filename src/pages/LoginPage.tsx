@@ -101,7 +101,7 @@ const LoginPage = () => {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-8">
-          © 2024 Fasmerco. Todos los derechos reservados.
+          © 2026 Fasmerco. Todos los derechos reservados.
         </p>
       </div>
     </div>
