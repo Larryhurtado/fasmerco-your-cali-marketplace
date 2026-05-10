@@ -57,6 +57,17 @@ const formatCOP = (n: number) =>
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("pedidos");
   const [selectedOrder, setSelectedOrder] = useState<typeof fakeOrders[0] | null>(null);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Sesión cerrada");
+    navigate("/login");
+  };
+
+  const displayName = (user?.user_metadata?.full_name as string) || user?.email?.split("@")[0] || "Usuario";
+  const displayEmail = user?.email ?? "";
 
   const sidebarLinks = [
     { icon: Package, label: "Mis Pedidos", tab: "pedidos" },
