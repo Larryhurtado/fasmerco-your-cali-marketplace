@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Package, ShoppingCart, BarChart3, Star, Store, Settings, LogOut, Plus, Search,
