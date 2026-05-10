@@ -100,6 +100,12 @@ const sidebarItems = [
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Sesión cerrada");
+    navigate("/login");
+  };
   const [activeTab, setActiveTab] = useState("dashboard");
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
