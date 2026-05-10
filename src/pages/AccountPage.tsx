@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   User, MapPin, Package, Heart, CreditCard, ShieldCheck, Bell, ChevronRight, Star, BadgeCheck, LogOut, Settings, HelpCircle, X, Truck, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 
 const fakeOrders = [
   {
