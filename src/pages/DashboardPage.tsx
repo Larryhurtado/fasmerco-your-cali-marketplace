@@ -153,7 +153,7 @@ const DashboardPage = () => {
 
         <div className="p-3 border-t border-border">
           <button
-            onClick={() => navigate("/login")}
+            onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/5 transition"
           >
             <LogOut className="h-4.5 w-4.5" />
