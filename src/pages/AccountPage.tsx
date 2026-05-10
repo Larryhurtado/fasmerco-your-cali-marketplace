@@ -127,10 +127,10 @@ const AccountPage = () => {
                 </button>
               );
             })}
-            <Link to="/login" className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-destructive hover:bg-destructive/5 transition">
+            <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-destructive hover:bg-destructive/5 transition">
               <LogOut className="h-4.5 w-4.5" />
               <span className="flex-1 text-left">Cerrar Sesión</span>
-            </Link>
+            </button>
           </nav>
         </aside>
 
