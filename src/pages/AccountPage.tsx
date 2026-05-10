@@ -96,8 +96,8 @@ const AccountPage = () => {
               <User className="h-10 w-10 text-primary" />
             </div>
             <div>
-              <h2 className="font-bold text-foreground text-lg">Juan Pérez</h2>
-              <p className="text-sm text-muted-foreground">juan.perez@email.com</p>
+              <h2 className="font-bold text-foreground text-lg">{displayName}</h2>
+              <p className="text-sm text-muted-foreground break-all">{displayEmail}</p>
             </div>
             <div className="flex items-center justify-center gap-1 text-sm">
               <BadgeCheck className="h-4 w-4 text-primary" />
