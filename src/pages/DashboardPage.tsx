@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Package, ShoppingCart, BarChart3, Star, Store, Settings, LogOut, Plus, Search,
@@ -98,6 +100,12 @@ const sidebarItems = [
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Sesión cerrada");
+    navigate("/login");
+  };
   const [activeTab, setActiveTab] = useState("dashboard");
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -145,7 +153,7 @@ const DashboardPage = () => {
 
         <div className="p-3 border-t border-border">
           <button
-            onClick={() => navigate("/login")}
+            onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/5 transition"
           >
             <LogOut className="h-4.5 w-4.5" />

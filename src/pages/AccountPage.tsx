@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   User, MapPin, Package, Heart, CreditCard, ShieldCheck, Bell, ChevronRight, Star, BadgeCheck, LogOut, Settings, HelpCircle, X, Truck, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 
 const fakeOrders = [
   {
@@ -55,6 +57,17 @@ const formatCOP = (n: number) =>
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("pedidos");
   const [selectedOrder, setSelectedOrder] = useState<typeof fakeOrders[0] | null>(null);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Sesión cerrada");
+    navigate("/login");
+  };
+
+  const displayName = (user?.user_metadata?.full_name as string) || user?.email?.split("@")[0] || "Usuario";
+  const displayEmail = user?.email ?? "";
 
   const sidebarLinks = [
     { icon: Package, label: "Mis Pedidos", tab: "pedidos" },
@@ -83,8 +96,8 @@ const AccountPage = () => {
               <User className="h-10 w-10 text-primary" />
             </div>
             <div>
-              <h2 className="font-bold text-foreground text-lg">Juan Pérez</h2>
-              <p className="text-sm text-muted-foreground">juan.perez@email.com</p>
+              <h2 className="font-bold text-foreground text-lg">{displayName}</h2>
+              <p className="text-sm text-muted-foreground break-all">{displayEmail}</p>
             </div>
             <div className="flex items-center justify-center gap-1 text-sm">
               <BadgeCheck className="h-4 w-4 text-primary" />
@@ -114,10 +127,10 @@ const AccountPage = () => {
                 </button>
               );
             })}
-            <Link to="/login" className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-destructive hover:bg-destructive/5 transition">
+            <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-destructive hover:bg-destructive/5 transition">
               <LogOut className="h-4.5 w-4.5" />
               <span className="flex-1 text-left">Cerrar Sesión</span>
-            </Link>
+            </button>
           </nav>
         </aside>
 
