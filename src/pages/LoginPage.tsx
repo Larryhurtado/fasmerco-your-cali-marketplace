@@ -35,7 +35,7 @@ const LoginPage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <Link to="/auth?role=user" className="group bg-card border border-border rounded-2xl p-8 text-left hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 space-y-5">
+          <Link to="/account" className="group bg-card border border-border rounded-2xl p-8 text-left hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 space-y-5">
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <User className="h-8 w-8 text-primary" />
             </div>
