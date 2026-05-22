@@ -39,20 +39,13 @@ const App = () => (
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/search" element={<SearchPage />} />
-                <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
-                <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/account" element={<AccountPage />} />
                 <Route path="/stores" element={<AllStoresPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/auth" element={<AuthPage />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute requireRole="store">
-                    <DashboardPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CartProvider>
